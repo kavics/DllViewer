@@ -1,0 +1,30 @@
+﻿<Window x:Class="DllViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DllViewer"
+        mc:Ignorable="d"
+        Title="&lt;? Dll View" Height="365.273" Width="657.273">
+    <Grid>
+        <DataGrid x:Name="dataGrid1" AutoGenerateColumns="False" Margin="10" MouseDoubleClick="dataGrid1_MouseDoubleClick">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="dataGrid1_Row_DoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="Id" Header="Nr" Binding="{Binding Mode=OneWay, Path=Id}" Width="30" />
+                <DataGridTextColumn x:Name="Name" Header="Name" Binding="{Binding Mode=OneWay, Path=Name}" Width="300" />
+                <DataGridTextColumn x:Name="Version" Header="Version" Binding="{Binding Mode=OneWay, Path=Version}" Width="80" />
+                <DataGridTextColumn x:Name="FwVersion" Header=".NET" Binding="{Binding Mode=OneWay, Path=FrameworkVersion}" Width="100" />
+                <DataGridTextColumn x:Name="Debug" Header="Debug" Binding="{Binding Mode=OneWay, Path=DebugInfo}" Width="80" />
+                <DataGridTextColumn x:Name="Title" Header="Title" Binding="{Binding Mode=OneWay, Path=Title}" Width="350" />
+                <DataGridTextColumn x:Name="CreationTime" Header="Created" Binding="{Binding Mode=OneWay, Path=CreationTime}" Width="140" />
+                <DataGridTextColumn x:Name="LastWriteTime" Header="Written" Binding="{Binding Mode=OneWay, Path=LastWriteTime}" Width="140" />
+                <DataGridTextColumn x:Name="LastAccessTime" Header="Accessed" Binding="{Binding Mode=OneWay, Path=LastAccessTime}" Width="140" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
