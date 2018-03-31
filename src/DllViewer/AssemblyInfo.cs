@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DllViewer
 {
-    internal enum AssemblyKind { Unknown, Exe, Dll }
+    public enum AssemblyKind { Unknown, Exe, Dll }
 
-    internal class AssemblyInfo
+    public class AssemblyInfo
     {
         private Assembly _assembly;
         private AssemblyName _assemblyName;

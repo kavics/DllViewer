@@ -30,21 +30,57 @@ namespace DllViewer
         {
             InitializeComponent();
             Context = context ?? new DllViewerContext();
-            // TextBlock1.Text = GetInfo(context.CommandLine.FirstOrDefault()) ?? "No available information.";
-            var assemblies =  GetInfo(context.CommandLine.FirstOrDefault());
-            for (int i = 0; i < assemblies.Length; i++)
-                assemblies[i].Id = i + 1;
-            dataGrid1.ItemsSource = assemblies;
+            ResolveAssemblies(Context);
+            //var assemblies =  GetInfo(context.CommandLine.FirstOrDefault());
+            //for (int i = 0; i < assemblies.Length; i++)
+            //    assemblies[i].Id = i + 1;
+            dataGrid1.ItemsSource = context.Assemblies;
         }
 
-        private AssemblyInfo[] GetInfo(string path)
+        private void ResolveAssemblies(DllViewerContext context)
+        {
+            var path = context.CommandLine.FirstOrDefault();
+
+            if (path == null)
+                return;
+
+            AssemblyInfo[] assemblies;
+            AssemblyInfo selectedAssembly;
+            string directoryPath = null;
+            string selectedPath = null;
+            if (Directory.Exists(path))
+            {
+                directoryPath = path;
+                selectedPath = null;
+            }
+            else if (File.Exists(path))
+            {
+                directoryPath = IO.Path.GetDirectoryName(path);
+                selectedPath = path;
+            }
+
+            assemblies = directoryPath == null
+                ? new AssemblyInfo[0]
+                : GetAssemblies(directoryPath);
+
+            selectedAssembly = selectedPath == null 
+                ? assemblies.FirstOrDefault()
+                : selectedAssembly = assemblies
+                    .Where(a => a.Location.Equals(selectedPath, StringComparison.OrdinalIgnoreCase))
+                    .FirstOrDefault();
+
+            context.Assemblies = assemblies;
+            context.SelectedAssembly = selectedAssembly;
+        }
+
+        private AssemblyInfo[] GetAssemblies(string path)
         {
             if (path == null)
                 return null;
             if (Directory.Exists(path))
                 return GetFolderInfo(path);
             if (File.Exists(path))
-                return new[] { GetFileInfo(path) };
+                return new[] { new AssemblyInfo(path) };
             return null;
         }
 
@@ -53,13 +89,8 @@ namespace DllViewer
             return Directory.GetFiles(path, "*.exe")
                 .Union(
                     Directory.GetFiles(path, "*.dll"))
-                .Select(p => GetFileInfo(p))
+                .Select(p => new AssemblyInfo(p))
                 .ToArray();
-        }
-
-        private AssemblyInfo GetFileInfo(string path)
-        {
-            return new AssemblyInfo(path);
         }
 
         private void dataGrid1_MouseDoubleClick(object sender, MouseButtonEventArgs e)

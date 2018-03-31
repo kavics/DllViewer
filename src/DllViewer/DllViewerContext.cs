@@ -10,6 +10,9 @@ namespace DllViewer
     {
         public string[] CommandLine { get; }
 
+        public AssemblyInfo SelectedAssembly { get; set; }
+        public AssemblyInfo[] Assemblies { get; set; }
+
         public DllViewerContext(string[] commandLineArguments = null)
         {
             CommandLine = commandLineArguments ?? new string[0];
