@@ -5,24 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DllViewer"
         mc:Ignorable="d"
-        Title="&lt;? Dll View" Height="365.273" Width="657.273">
+        Title="&lt;? Dll View" Height="515" Width="746">
     <Grid>
-        <DataGrid x:Name="dataGrid1" AutoGenerateColumns="False" Margin="10" MouseDoubleClick="dataGrid1_MouseDoubleClick">
+        <DataGrid x:Name="dataGrid1" AutoGenerateColumns="False" Margin="0" MouseDoubleClick="dataGrid1_MouseDoubleClick"
+                  GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="LightGreen">
             <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FFC9A503"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#FFC9A503"/>
                 <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#CCDAFF" />
+                        </Trigger>
+                    </Style.Triggers>
                     <EventSetter Event="MouseDoubleClick" Handler="dataGrid1_Row_DoubleClick"/>
+                    <Setter Property="Background" Value="#FFF9F6EF"/>
+                    <Setter Property="Foreground" Value="#FF014601"/>
+                    <Setter Property="FontSize" Value="14" />
+                </Style>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#FF5FBA7D"/>
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="IsTabStop" Value="False" />
+                    <Setter Property="SeparatorBrush" Value="#FFC9CACA" />
+                    <Setter Property="Padding" Value="2" />
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Style>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="Id" Header="Nr" Binding="{Binding Mode=OneWay, Path=Id}" Width="30" />
-                <DataGridTextColumn x:Name="Name" Header="Name" Binding="{Binding Mode=OneWay, Path=Name}" Width="300" />
-                <DataGridTextColumn x:Name="Version" Header="Version" Binding="{Binding Mode=OneWay, Path=Version}" Width="80" />
+                <DataGridTextColumn x:Name="Kind" Header="Kind" Binding="{Binding Mode=OneWay, Path=Kind}" Width="40" />
+                <DataGridTextColumn x:Name="Name" Header="Name" Binding="{Binding Mode=OneWay, Path=Name}" Width="360" />
+                <DataGridTextColumn x:Name="Version" Header="Version" Binding="{Binding Mode=OneWay, Path=Version}" Width="90" />
                 <DataGridTextColumn x:Name="FwVersion" Header=".NET" Binding="{Binding Mode=OneWay, Path=FrameworkVersion}" Width="100" />
                 <DataGridTextColumn x:Name="Debug" Header="Debug" Binding="{Binding Mode=OneWay, Path=DebugInfo}" Width="80" />
                 <DataGridTextColumn x:Name="Title" Header="Title" Binding="{Binding Mode=OneWay, Path=Title}" Width="350" />
-                <DataGridTextColumn x:Name="CreationTime" Header="Created" Binding="{Binding Mode=OneWay, Path=CreationTime}" Width="140" />
-                <DataGridTextColumn x:Name="LastWriteTime" Header="Written" Binding="{Binding Mode=OneWay, Path=LastWriteTime}" Width="140" />
-                <DataGridTextColumn x:Name="LastAccessTime" Header="Accessed" Binding="{Binding Mode=OneWay, Path=LastAccessTime}" Width="140" />
+                <DataGridTextColumn x:Name="CreationTime" Header="Created" Binding="{Binding Mode=OneWay, Path=CreationTime}" Width="160" />
+                <DataGridTextColumn x:Name="LastWriteTime" Header="Written" Binding="{Binding Mode=OneWay, Path=LastWriteTime}" Width="160" />
             </DataGrid.Columns>
         </DataGrid>
 
