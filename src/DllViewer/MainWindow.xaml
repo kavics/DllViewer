@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DllViewer"
         mc:Ignorable="d"
-        Title="&lt;? Dll View" Height="515" Width="746">
+        Title="Dll Viewer" Height="515" Width="746">
     <Grid>
         <DataGrid x:Name="dataGrid1" AutoGenerateColumns="False" Margin="0" MouseDoubleClick="dataGrid1_MouseDoubleClick"
                   GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="LightGreen">
