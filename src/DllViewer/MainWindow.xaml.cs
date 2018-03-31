@@ -31,9 +31,7 @@ namespace DllViewer
             InitializeComponent();
             Context = context ?? new DllViewerContext();
             ResolveAssemblies(Context);
-            //var assemblies =  GetInfo(context.CommandLine.FirstOrDefault());
-            //for (int i = 0; i < assemblies.Length; i++)
-            //    assemblies[i].Id = i + 1;
+            this.DataContext = context;
             dataGrid1.ItemsSource = context.Assemblies;
         }
 
@@ -74,6 +72,8 @@ namespace DllViewer
 
             for (int i = 0; i < assemblies.Length; i++)
                 assemblies[i].Id = i + 1;
+
+            context.Location = assemblies.Length == 0 ? "No assembly selected." : directoryPath;
 
             context.Assemblies = assemblies;
             context.SelectedAssembly = selectedAssembly;
