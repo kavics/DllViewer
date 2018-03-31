@@ -62,7 +62,11 @@ namespace DllViewer
 
             assemblies = directoryPath == null
                 ? new AssemblyInfo[0]
-                : GetAssemblies(directoryPath);
+                : Directory.GetFiles(directoryPath, "*.exe")
+                    .Union(
+                        Directory.GetFiles(directoryPath, "*.dll"))
+                    .Select(p => new AssemblyInfo(p))
+                    .ToArray();
 
             selectedAssembly = selectedPath == null 
                 ? assemblies.FirstOrDefault()
@@ -77,26 +81,6 @@ namespace DllViewer
 
             context.Assemblies = assemblies;
             context.SelectedAssembly = selectedAssembly;
-        }
-
-        private AssemblyInfo[] GetAssemblies(string path)
-        {
-            if (path == null)
-                return null;
-            if (Directory.Exists(path))
-                return GetFolderInfo(path);
-            if (File.Exists(path))
-                return new[] { new AssemblyInfo(path) };
-            return null;
-        }
-
-        private AssemblyInfo[] GetFolderInfo(string path)
-        {
-            return Directory.GetFiles(path, "*.exe")
-                .Union(
-                    Directory.GetFiles(path, "*.dll"))
-                .Select(p => new AssemblyInfo(p))
-                .ToArray();
         }
 
         private void dataGrid1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
