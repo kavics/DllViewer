@@ -69,6 +69,9 @@ namespace DllViewer
                     .Where(a => a.Location.Equals(selectedPath, StringComparison.OrdinalIgnoreCase))
                     .FirstOrDefault();
 
+            for (int i = 0; i < assemblies.Length; i++)
+                assemblies[i].Id = i + 1;
+
             context.Assemblies = assemblies;
             context.SelectedAssembly = selectedAssembly;
         }
