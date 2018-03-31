@@ -33,6 +33,7 @@ namespace DllViewer
             ResolveAssemblies(Context);
             this.DataContext = context;
             dataGrid1.ItemsSource = context.Assemblies;
+            dataGrid1.SelectedItem = context.SelectedAssembly;
         }
 
         private void ResolveAssemblies(DllViewerContext context)
