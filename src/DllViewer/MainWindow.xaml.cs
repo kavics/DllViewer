@@ -42,7 +42,10 @@ namespace DllViewer
             var path = context.CommandLine.FirstOrDefault();
 
             if (path == null)
-                return;
+            {
+                var thisExe = Assembly.GetExecutingAssembly();
+                path = thisExe.Location;
+            }
 
             AssemblyInfo[] assemblies;
             AssemblyInfo selectedAssembly;
