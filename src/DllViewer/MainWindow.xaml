@@ -25,7 +25,7 @@
             </TextBlock.Resources>
         </TextBlock>
         <DataGrid x:Name="dataGrid1" AutoGenerateColumns="False" Margin="0,28,0,275" MouseDoubleClick="dataGrid1_MouseDoubleClick"
-                  GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="LightGreen" BorderThickness="0">
+                  GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="LightGreen" BorderThickness="0" SelectionChanged="dataGrid1_SelectionChanged" SelectionMode="Single">
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource highlightColor}"/>
                 <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{StaticResource highlightColor}"/>
@@ -70,28 +70,28 @@
         </DataGrid>
         <Grid Margin="10,0,10,10" Height="265" VerticalAlignment="Bottom">
             <TextBox Height="28" Margin="10,1,10,0" TextWrapping="NoWrap" FontSize="18" FontWeight="Bold" Text="{Binding Mode=OneWay, Path=SelectedAssembly.NameAndVersion}" BorderThickness="0" VerticalAlignment="Top" TextAlignment="Center" IsReadOnly="True"/>
-            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="FullName:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,29,0,0" HorizontalAlignment="Left" Width="113" TextDecorations="{x:Null}" Height="23"/>
-            <TextBox Height="23" Margin="118,29,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.FullName}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="600"/>
-            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Runtime:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,52,0,0" HorizontalAlignment="Left" Width="113" TextDecorations="{x:Null}" Height="23"/>
-            <TextBox Height="23" Margin="118,52,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.ImageRuntimeVersion}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="253"/>
+            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="FullName:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,29,0,0" HorizontalAlignment="Left" Width="84" TextDecorations="{x:Null}" Height="23"/>
+            <TextBox Height="23" Margin="89,29,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.FullName}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="629"/>
 
-            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="GUID:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,75,0,0" HorizontalAlignment="Left" Width="113" TextDecorations="{x:Null}" Height="23"/>
-            <TextBox Height="23" Margin="118,75,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Guid}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="253"/>
+            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Runtime:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,60,0,0" HorizontalAlignment="Left" Width="84" TextDecorations="{x:Null}" Height="23"/>
+            <TextBox Height="23" Margin="89,60,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.ImageRuntimeVersion}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="286"/>
+            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="GUID:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,83,0,0" HorizontalAlignment="Left" Width="84" TextDecorations="{x:Null}" Height="23"/>
+            <TextBox Height="23" Margin="89,83,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Guid}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="286"/>
+            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Title:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,106,0,0" HorizontalAlignment="Left" Width="84" TextDecorations="{x:Null}" Height="23"/>
+            <TextBox Height="23" Margin="89,106,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Title}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="286"/>
+            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Description:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,129,0,0" HorizontalAlignment="Left" Width="84" TextDecorations="{x:Null}" Height="23"/>
+            <TextBox Height="41" Margin="89,129,0,0" TextWrapping="Wrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Description}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="286"/>
+            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Company:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,172,0,0" HorizontalAlignment="Left" Width="84" TextDecorations="{x:Null}" Height="23"/>
+            <TextBox Height="23" Margin="89,172,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Company}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="286"/>
+            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Product:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,195,0,0" HorizontalAlignment="Left" Width="84" TextDecorations="{x:Null}" Height="23"/>
+            <TextBox Height="23" Margin="89,195,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Product}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="286"/>
+            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Copyright:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,218,0,0" HorizontalAlignment="Left" Width="84" TextDecorations="{x:Null}" Height="23"/>
+            <TextBox Height="23" Margin="89,218,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Copyright}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="286"/>
+            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Trademark:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,242,0,0" HorizontalAlignment="Left" Width="84" TextDecorations="{x:Null}" Height="23"/>
+            <TextBox Height="23" Margin="89,241,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Trademark}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="286"/>
 
-            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Title:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,98,0,0" HorizontalAlignment="Left" Width="113" TextDecorations="{x:Null}" Height="23"/>
-            <TextBox Height="23" Margin="118,98,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Title}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="253"/>
-            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Description:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,121,0,0" HorizontalAlignment="Left" Width="113" TextDecorations="{x:Null}" Height="23"/>
-            <TextBox Height="23" Margin="118,121,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Description}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="253"/>
-            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Company:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,144,0,0" HorizontalAlignment="Left" Width="113" TextDecorations="{x:Null}" Height="23"/>
-            <TextBox Height="23" Margin="118,144,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Company}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="253"/>
-            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Product:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,167,0,0" HorizontalAlignment="Left" Width="113" TextDecorations="{x:Null}" Height="23"/>
-            <TextBox Height="23" Margin="118,167,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Product}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="253"/>
-            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Copyright:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,190,0,0" HorizontalAlignment="Left" Width="113" TextDecorations="{x:Null}" Height="23"/>
-            <TextBox Height="23" Margin="118,190,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Copyright}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="253"/>
-            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="Trademark:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="0,213,0,0" HorizontalAlignment="Left" Width="113" TextDecorations="{x:Null}" Height="23"/>
-            <TextBox Height="23" Margin="118,213,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Trademark}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="253"/>
-            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="References:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="376,57,0,0" HorizontalAlignment="Left" Width="81" TextDecorations="{x:Null}" Height="23"/>
-            <TextBox HorizontalAlignment="Left" Height="185" Margin="380,80,0,0" FontSize="14" TextWrapping="NoWrap" Text="{Binding Mode=OneWay, Path=SelectedAssembly.ReferencesAsText}" VerticalAlignment="Top" BorderThickness="0" Width="338"/>
+            <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="References:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="376,60,0,0" HorizontalAlignment="Left" Width="81" TextDecorations="{x:Null}" Height="23"/>
+            <TextBox HorizontalAlignment="Left" Height="182" Margin="380,83,0,0" FontSize="14" TextWrapping="NoWrap" Text="{Binding Mode=OneWay, Path=SelectedAssembly.ReferencesAsText}" VerticalAlignment="Top" BorderThickness="0" Width="338" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
         </Grid>
 
     </Grid>
