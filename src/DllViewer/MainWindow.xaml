@@ -91,8 +91,8 @@
             <TextBox Height="23" Margin="89,241,0,0" TextWrapping="NoWrap" FontSize="14" Text="{Binding Mode=OneWay, Path=SelectedAssembly.Trademark}" BorderThickness="0" VerticalAlignment="Top" IsReadOnly="True" HorizontalAlignment="Left" Width="286"/>
 
             <TextBlock TextWrapping="NoWrap" TextAlignment="Right" Text="References:" FontSize="14" FontWeight="Bold" VerticalAlignment="Top" Margin="376,60,0,0" HorizontalAlignment="Left" Width="81" TextDecorations="{x:Null}" Height="23"/>
-            <TextBox HorizontalAlignment="Left" Height="182" Margin="380,83,0,0" FontSize="14" TextWrapping="NoWrap" Text="{Binding Mode=OneWay, Path=SelectedAssembly.ReferencesAsText}" VerticalAlignment="Top" BorderThickness="0" Width="338" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
+            <TextBox HorizontalAlignment="Left" Height="182" Margin="380,83,0,0" FontSize="14" TextWrapping="NoWrap" Text="{Binding Mode=OneWay, Path=SelectedAssembly.ReferencesAsText}" VerticalAlignment="Top" BorderThickness="0" Width="338" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" IsReadOnly="True" />
         </Grid>
-
+        
     </Grid>
 </Window>

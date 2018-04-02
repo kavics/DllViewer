@@ -105,12 +105,8 @@ namespace DllViewer
 
         private void dataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_selectedItemChanging)
-                return;
-            if (dataGrid1.SelectedItem is AssemblyInfo asmInfo)
-            {
+            if (!_selectedItemChanging && dataGrid1.SelectedItem is AssemblyInfo asmInfo)
                 Context.SelectedAssembly = asmInfo;
-            }
         }
     }
 }
