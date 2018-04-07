@@ -25,46 +25,74 @@ namespace DllViewer
     public partial class MainWindow : Window
     {
         internal DllViewerContext Context { get; set; }
+        private bool _selectedItemChanging;
 
         public MainWindow(DllViewerContext context = null)
         {
             InitializeComponent();
             Context = context ?? new DllViewerContext();
-            // TextBlock1.Text = GetInfo(context.CommandLine.FirstOrDefault()) ?? "No available information.";
-            var assemblies =  GetInfo(context.CommandLine.FirstOrDefault());
+            ResolveAssemblies(Context);
+
+            _selectedItemChanging = true;
+            this.DataContext = context;
+            dataGrid1.ItemsSource = context.Assemblies;
+            dataGrid1.SelectedItem = context.SelectedAssembly;
+            _selectedItemChanging = false;
+
+            dataGrid1.UpdateLayout();
+            dataGrid1.ScrollIntoView(dataGrid1.SelectedItem);
+        }
+
+        private void ResolveAssemblies(DllViewerContext context)
+        {
+            var path = context.CommandLine.FirstOrDefault();
+
+            if (path == null)
+            {
+                var thisExe = Assembly.GetExecutingAssembly();
+                path = thisExe.Location;
+            }
+
+            AssemblyInfo[] assemblies;
+            AssemblyInfo selectedAssembly;
+            string directoryPath = null;
+            string selectedPath = null;
+            if (Directory.Exists(path))
+            {
+                directoryPath = path;
+                selectedPath = null;
+            }
+            else if (File.Exists(path))
+            {
+                directoryPath = IO.Path.GetDirectoryName(path);
+                selectedPath = path;
+            }
+
+            assemblies = directoryPath == null
+                ? new AssemblyInfo[0]
+                : Directory.GetFiles(directoryPath, "*.exe")
+                    .Union(
+                        Directory.GetFiles(directoryPath, "*.dll"))
+                    .Select(p => new AssemblyInfo(p))
+                    .ToArray();
+
+            selectedAssembly = selectedPath == null 
+                ? assemblies.FirstOrDefault()
+                : selectedAssembly = assemblies
+                    .Where(a => a.Location.Equals(selectedPath, StringComparison.OrdinalIgnoreCase))
+                    .FirstOrDefault();
+
             for (int i = 0; i < assemblies.Length; i++)
                 assemblies[i].Id = i + 1;
-            dataGrid1.ItemsSource = assemblies;
-        }
 
-        private AssemblyInfo[] GetInfo(string path)
-        {
-            if (path == null)
-                return null;
-            if (Directory.Exists(path))
-                return GetFolderInfo(path);
-            if (File.Exists(path))
-                return new[] { GetFileInfo(path) };
-            return null;
-        }
+            context.Location = assemblies.Length == 0 ? "No assembly selected." : directoryPath;
 
-        private AssemblyInfo[] GetFolderInfo(string path)
-        {
-            return Directory.GetFiles(path, "*.exe")
-                .Union(
-                    Directory.GetFiles(path, "*.dll"))
-                .Select(p => GetFileInfo(p))
-                .ToArray();
-        }
-
-        private AssemblyInfo GetFileInfo(string path)
-        {
-            return new AssemblyInfo(path);
+            context.Assemblies = assemblies;
+            context.SelectedAssembly = selectedAssembly;
         }
 
         private void dataGrid1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            int q = 1;
         }
         private void dataGrid1_Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -72,8 +100,13 @@ namespace DllViewer
                 return;
             if (!(row.DataContext is AssemblyInfo asmInfo))
                 return;
+            // do something
+        }
 
-            int q = 1;
+        private void dataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!_selectedItemChanging && dataGrid1.SelectedItem is AssemblyInfo asmInfo)
+                Context.SelectedAssembly = asmInfo;
         }
     }
 }
