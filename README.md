@@ -1,6 +1,6 @@
 # DllViewer
 
-Simple Windows 10 application that shows a grid of the important properties of a selected .NET DLL and all .NET assemblies in the directory.
+Simple Windows 10 application that shows a table view of the important properties of a selected .NET DLL and all .NET assemblies in the directory.
 
 ## Installation
 
