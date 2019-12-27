@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DllViewer
 {
@@ -12,9 +9,9 @@ namespace DllViewer
 
     public class AssemblyInfo
     {
-        private Assembly _assembly;
-        private AssemblyName _assemblyName;
-        private FileInfo _fileInfo;
+        private readonly Assembly _assembly;
+        private readonly AssemblyName _assemblyName;
+        private readonly FileInfo _fileInfo;
 
         public int Id { get; set; }
         public AssemblyKind Kind { get; }
@@ -60,6 +57,7 @@ namespace DllViewer
 
             foreach(var attr in _assembly.CustomAttributes)
             {
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (attr.AttributeType.FullName)
                 {
                     case "System.Runtime.CompilerServices.CompilationRelaxationsAttribute": break;
@@ -89,9 +87,9 @@ namespace DllViewer
             ReferencesAsText = string.Join(Environment.NewLine, References.Select(r => r.Name).ToArray());
         }
 
-        private string GetDebugInfo(object value)
+        private static string GetDebugInfo(object value)
         {
-            if (!(value is Int32 modes))
+            if (!(value is int modes))
                 return string.Empty;
             return Convert.ToString(modes, 2);
         }
