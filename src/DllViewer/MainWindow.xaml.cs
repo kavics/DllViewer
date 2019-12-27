@@ -53,8 +53,6 @@ namespace DllViewer
                 path = thisExe.Location;
             }
 
-            AssemblyInfo[] assemblies;
-            AssemblyInfo selectedAssembly;
             string directoryPath = null;
             string selectedPath = null;
             if (Directory.Exists(path))
@@ -68,7 +66,7 @@ namespace DllViewer
                 selectedPath = path;
             }
 
-            assemblies = directoryPath == null
+            var assemblies = directoryPath == null
                 ? new AssemblyInfo[0]
                 : Directory.GetFiles(directoryPath, "*.exe")
                     .Union(
@@ -76,11 +74,10 @@ namespace DllViewer
                     .Select(p => new AssemblyInfo(p))
                     .ToArray();
 
-            selectedAssembly = selectedPath == null 
+            var selectedFileName = IO.Path.GetFileName(selectedPath);
+            var selectedAssembly = selectedPath == null 
                 ? assemblies.FirstOrDefault()
-                : selectedAssembly = assemblies
-                    .Where(a => a.Location.Equals(selectedPath, StringComparison.OrdinalIgnoreCase))
-                    .FirstOrDefault();
+                : assemblies.FirstOrDefault(a => IsFileNameEqual(a.Location, selectedFileName)) ?? assemblies.FirstOrDefault();
 
             for (int i = 0; i < assemblies.Length; i++)
                 assemblies[i].Id = i + 1;
@@ -89,6 +86,11 @@ namespace DllViewer
 
             context.Assemblies = assemblies;
             context.SelectedAssembly = selectedAssembly;
+        }
+
+        private bool IsFileNameEqual(string path, string name)
+        {
+            return IO.Path.GetFileName(path).Equals(name, StringComparison.OrdinalIgnoreCase);
         }
 
         private void dataGrid1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
