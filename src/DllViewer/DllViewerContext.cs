@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace DllViewer
 {
@@ -12,8 +7,7 @@ namespace DllViewer
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public string[] CommandLine { get; }
@@ -21,7 +15,7 @@ namespace DllViewer
         private AssemblyInfo[] _assemblies;
         public AssemblyInfo[] Assemblies
         {
-            get { return _assemblies; }
+            get => _assemblies;
             set
             {
                 _assemblies = value;
@@ -32,7 +26,7 @@ namespace DllViewer
         private AssemblyInfo _selectedAssembly;
         public AssemblyInfo SelectedAssembly
         {
-            get { return _selectedAssembly; }
+            get => _selectedAssembly;
             set
             {
                 _selectedAssembly = value;
@@ -43,7 +37,7 @@ namespace DllViewer
         private string _location;
         public string Location
         {
-            get { return _location; }
+            get => _location;
             set
             {
                 _location = value;

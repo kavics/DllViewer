@@ -7,32 +7,32 @@
         mc:Ignorable="d"
         Title="Dll Viewer" Height="692" Width="746">
     <Window.Resources>
-        <Color x:Key="highlightColor">#FFC9A503</Color>
-        <SolidColorBrush x:Key="green" Color="#FF438559"/>
-        <SolidColorBrush x:Key="highlight" Color="{StaticResource highlightColor}"/>
-        <SolidColorBrush x:Key="selectedItem" Color="#CCDAFF"/>
+        <Color x:Key="HighlightColor">#FFC9A503</Color>
+        <SolidColorBrush x:Key="Green" Color="#FF438559"/>
+        <SolidColorBrush x:Key="Highlight" Color="{StaticResource HighlightColor}"/>
+        <SolidColorBrush x:Key="SelectedItem" Color="#CCDAFF"/>
     </Window.Resources>
     <Grid>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Mode=OneWay, Path=Location}" VerticalAlignment="Top" Width="738" Height="28">
             <TextBlock.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="Background" Value="White"/>
-                    <Setter Property="Foreground" Value="{StaticResource green}" />
+                    <Setter Property="Foreground" Value="{StaticResource Green}" />
                     <Setter Property="FontSize" Value="14" />
                     <Setter Property="FontWeight" Value="Bold" />
                     <Setter Property="Padding" Value="4" />
                 </Style>
             </TextBlock.Resources>
         </TextBlock>
-        <DataGrid x:Name="dataGrid1" AutoGenerateColumns="False" Margin="0,28,0,275" MouseDoubleClick="dataGrid1_MouseDoubleClick"
+        <DataGrid x:Name="DataGrid1" AutoGenerateColumns="False" Margin="0,28,0,275" MouseDoubleClick="dataGrid1_MouseDoubleClick"
                   GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="LightGreen" BorderThickness="0" SelectionChanged="dataGrid1_SelectionChanged" SelectionMode="Single">
             <DataGrid.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource highlightColor}"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{StaticResource highlightColor}"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource HighlightColor}"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{StaticResource HighlightColor}"/>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="{StaticResource selectedItem}" />
+                            <Setter Property="Background" Value="{StaticResource SelectedItem}" />
                         </Trigger>
                     </Style.Triggers>
                     <EventSetter Event="MouseDoubleClick" Handler="dataGrid1_Row_DoubleClick"/>
@@ -41,7 +41,7 @@
                     <Setter Property="FontSize" Value="14" />
                 </Style>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="{StaticResource green}"/>
+                    <Setter Property="Background" Value="{StaticResource Green}"/>
                     <Setter Property="Foreground" Value="White" />
                     <Setter Property="HorizontalContentAlignment" Value="Left" />
                     <Setter Property="VerticalContentAlignment" Value="Center" />
